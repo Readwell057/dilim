@@ -1,0 +1,67 @@
+{
+  "name": "dilim",
+  "version": "0.1.0",
+  "description": "Dilim - görsel, PDF, ses ve video dosyaların için çark arayüzlü dönüştürme ve kesme aracı",
+  "main": "main.js",
+  "author": "Dilim",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "test": "node test/core.test.js",
+    "dist": "electron-builder --win --x64 --publish never"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "pdfjs-dist": "6.2.108"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.dilim.app",
+    "productName": "Dilim",
+    "asar": false,
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "renderer/**/*",
+      "assets/**/*",
+      "package.json",
+      "!**/*.map",
+      "!**/node_modules/@napi-rs/**"
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Dilim",
+      "artifactName": "Dilim-Kurulum-${version}.exe"
+    },
+    "artifactName": "Dilim-Tasinabilir-${version}.${ext}"
+  }
+}
